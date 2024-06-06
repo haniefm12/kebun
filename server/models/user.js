@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
 // Importing validator package
 import validator from "validator";
 
+
 // Defining the user schema
 const userSchema = new Schema({
   name: {
