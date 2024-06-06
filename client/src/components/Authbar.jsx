@@ -10,8 +10,23 @@ import Button from '@mui/material/Button';
 import { useDispatch } from "react-redux";
 import { setMode } from "state";
 import { AppBar, IconButton, Toolbar, useTheme, Box } from "@mui/material";
+import { useLocation } from 'react-router-dom';
+
+const getLocationBasedButtonText = (pathname) => {
+  switch (pathname) {
+    case '/login':
+      return 'Sign Up';
+    case '/signup':
+      return 'Login';
+    default:
+      return null;
+  }
+};
 
 const Authbar= () =>{
+const location = useLocation();
+const buttonText = getLocationBasedButtonText(location.pathname);
+
 const dispatch = useDispatch();
 const theme = useTheme();
   return (
@@ -40,7 +55,7 @@ const theme = useTheme();
             )}
           </IconButton>
           </FlexBetween>
-          <Button color="inherit">SignUp</Button>
+          <Button color="inherit">{buttonText}</Button>
         </Toolbar>
       </AppBar>
     </Box>

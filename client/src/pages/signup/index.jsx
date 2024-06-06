@@ -27,11 +27,13 @@ const Signup = () => {
   };
 
   return (
-    <><Authbar></Authbar>
+    <><Authbar>
+      
+    </Authbar>
     <FlexBetween></FlexBetween>
     <Container maxWidth="xs" sx={{ py: 4 }}>
       <Typography variant="h4" align="center" gutterBottom>
-        Signup
+        Sign Up
       </Typography>
       <form onSubmit={handleSubmit}>
         <Box sx={{ mb: 2 }}>
@@ -91,7 +93,7 @@ const Signup = () => {
           disableElevation
           type="submit"
         >
-          Signup
+          Sign Up
         </Button>
       </form>
     </Container></>
