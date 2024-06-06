@@ -13,8 +13,14 @@ const createToken = (_id) => {
 
 // Define a function to handle login requests
 const loginUser = async (req, res) => {
-  // For now, simply return a JSON response with a message
-  res.json({ mssg: 'login user' });
+  const { email, password } = req.body;
+  try {
+    const user = await User.login(email, password);
+    const token = createToken(user._id);
+    res.status(200).json({ email, token });
+    } catch (error) {
+        res.status(400).json({ error: 'Invalid email or password' });
+        }
 };
 
 // Define a function to handle user signup requests
