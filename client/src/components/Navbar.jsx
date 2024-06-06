@@ -11,14 +11,15 @@ import FlexBetween from "./FlexBetween";
 import { useDispatch } from "react-redux";
 import { setMode } from "state";
 import profileImage from "assets/profile.jpg";
-import { AppBar, IconButton, InputBase, Toolbar, useTheme } from "@mui/material";
+import { AppBar, IconButton, Toolbar, useTheme, Box } from "@mui/material";
 
 const Navbar = ({
-    isSidebarOpen,
-    setIsSidebarOpen,
+  isSidebarOpen,
+  setIsSidebarOpen,
 }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
+
   return (
     <AppBar
       sx={{
@@ -33,19 +34,12 @@ const Navbar = ({
           <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
-          <FlexBetween
-            backgroundColor={theme.palette.background.alt}
-            borderRadius="9px"
-            gap="3rem"
-            p="0.1rem 1.5rem"
-          >
-            <InputBase placeholder="Search..."/>
-            <IconButton>
-                <search/>
-            </IconButton>
-          </FlexBetween>
+        </FlexBetween>
 
-          {/* RIGHT SIDE */}
+        {/* GAP */}
+        <Box sx={{ flexGrow: 10 }} />
+
+        {/* RIGHT SIDE */}
         <FlexBetween gap="1.5rem">
           <IconButton onClick={() => dispatch(setMode())}>
             {theme.palette.mode === "dark" ? (
@@ -54,10 +48,6 @@ const Navbar = ({
               <LightModeOutlined sx={{ fontSize: "25px" }} />
             )}
           </IconButton>
-          <IconButton>
-            <SettingsOutlined sx={{ fontSize: "25px" }} />
-          </IconButton>
-          </FlexBetween>
         </FlexBetween>
       </Toolbar>
     </AppBar>
