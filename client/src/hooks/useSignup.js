@@ -2,34 +2,33 @@ import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 
 export const useSignup = () => {
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(null);
-    const { dispatch } = useAuthContext();
- 
-    const signup = async (name, email, password, phoneNumber, role, image) => {
-        setIsLoading(true);
-        setError(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
+  const { dispatch } = useAuthContext();
 
-        const response = await fetch('api/user/signup' , {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ name, email, password, phoneNumber, role, image })
-        })
-        const json = await response.json()
+  const signup = async (name, email, password, phoneNumber, role, image) => {
+    setIsLoading(true);
+    setError(null);
 
-        if(!response.ok) {
-            setIsLoading(false);
-            setError(json.error);
-        }
-        if (response.ok){
-            localStorage.setItem('user', JSON.stringify(json))
+    const response = await fetch("api/user/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password, phoneNumber, role, image }),
+    });
+    const json = await response.json();
 
-            dispatch({tpye: 'LOGIN', payload: json})
-
-            setIsLoading(false)
-        }
+    if (!response.ok) {
+      setIsLoading(false);
+      setError(json.error);
     }
+    if (response.ok) {
+      localStorage.setItem("user", JSON.stringify(json));
 
-    return {signup, isLoading, error}
+      dispatch({ tpye: "LOGIN", payload: json });
 
-}
+      setIsLoading(false);
+    }
+  };
+
+  return { signup, isLoading, error };
+};

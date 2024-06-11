@@ -1,14 +1,21 @@
 import { useState } from "react";
-import { Box, Container, Typography, TextField, Button, IconButton } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import {
+  Box,
+  Container,
+  Typography,
+  TextField,
+  Button,
+  IconButton,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import FlexBetween from "../../components/FlexBetween";
 import Authbar from "../../components/Authbar";
 import { useLogin } from "../../hooks/useLogin";
 
 const Login = () => {
   // State variables for email, password, and form error
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [formError, setFormError] = useState(null);
 
   // State variable to toggle password visibility
@@ -30,12 +37,8 @@ const Login = () => {
 
   return (
     <>
-      <Authbar>
-        {/* Authbar component */}
-      </Authbar>
-      <FlexBetween>
-        {/* FlexBetween component */}
-      </FlexBetween>
+      <Authbar>{/* Authbar component */}</Authbar>
+      <FlexBetween>{/* FlexBetween component */}</FlexBetween>
       <Container maxWidth="xs" sx={{ py: 20 }}>
         <Typography variant="h4" align="center" gutterBottom>
           Login
@@ -55,13 +58,13 @@ const Login = () => {
               fullWidth
               label="Password"
               variant="outlined"
-              type={showPassword ? 'text' : 'password'} // Toggle password visibility
+              type={showPassword ? "text" : "password"} // Toggle password visibility
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               InputProps={{
                 endAdornment: (
                   <IconButton onClick={handleShowPassword}>
-                    {showPassword ? <VisibilityOff /> : <Visibility />} 
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 ),
               }}

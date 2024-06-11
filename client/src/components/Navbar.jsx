@@ -24,7 +24,6 @@ import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
-  
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -32,11 +31,11 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
-  const {logout} = useLogout()
-  const {user} = useAuthContext()
-  const handleOtherClick= () => {
-    logout()
-  }
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
+  const handleOtherClick = () => {
+    logout();
+  };
   console.log("User object:", user);
 
   return (
@@ -53,7 +52,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
-          
         </FlexBetween>
 
         {/* RIGHT SIDE */}
@@ -65,7 +63,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
               <LightModeOutlined sx={{ fontSize: "25px" }} />
             )}
           </IconButton>
-          
 
           <FlexBetween>
             <Button
@@ -88,21 +85,21 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                 sx={{ objectFit: "cover" }}
               />
               {user && (
-              <Box textAlign="left">
-                <Typography
-                  fontWeight="bold"
-                  fontSize="0.85rem"
-                  sx={{ color: theme.palette.secondary[100] }}
-                >
-                  {user.email}
-                </Typography>
-                <Typography
-                  fontSize="0.75rem"
-                  sx={{ color: theme.palette.secondary[200] }}
-                >
-                  {user.role}
-                </Typography>
-              </Box>
+                <Box textAlign="left">
+                  <Typography
+                    fontWeight="bold"
+                    fontSize="0.85rem"
+                    sx={{ color: theme.palette.secondary[100] }}
+                  >
+                    {user.email}
+                  </Typography>
+                  <Typography
+                    fontSize="0.75rem"
+                    sx={{ color: theme.palette.secondary[200] }}
+                  >
+                    {user.role}
+                  </Typography>
+                </Box>
               )}
               <ArrowDropDownOutlined
                 sx={{ color: theme.palette.secondary[300], fontSize: "25px" }}

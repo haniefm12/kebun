@@ -2,14 +2,13 @@
 import User from "../models/user.js";
 
 // Import the jsonwebtoken library (corrected import statement)
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 const createToken = (_id) => {
-   return jwt.sign({ _id }, process.env.SECRET, {
-      expiresIn: '1h' // token will expire in 1 hour
-    });
-    
-  };
+  return jwt.sign({ _id }, process.env.SECRET, {
+    expiresIn: "1h", // token will expire in 1 hour
+  });
+};
 
 // Define a function to handle login requests
 const loginUser = async (req, res) => {
@@ -18,9 +17,9 @@ const loginUser = async (req, res) => {
     const user = await User.login(email, password);
     const token = createToken(user._id);
     res.status(200).json({ email, token });
-    } catch (error) {
-        res.status(400).json({ error: 'Invalid email or password' });
-        }
+  } catch (error) {
+    res.status(400).json({ error: "Invalid email or password" });
+  }
 };
 
 // Define a function to handle user signup requests
@@ -30,7 +29,14 @@ const signupUser = async (req, res) => {
 
   try {
     // Call the signup method on the User model, passing in the user's details
-    const user = await User.signup(name, email, password, phoneNumber, role, image);
+    const user = await User.signup(
+      name,
+      email,
+      password,
+      phoneNumber,
+      role,
+      image
+    );
     const token = createToken(user._id);
     // If the signup is successful, return a JSON response with the user's email and user object
     res.status(200).json({ email, token });

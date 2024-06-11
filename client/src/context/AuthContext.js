@@ -1,6 +1,6 @@
 // Importing createContext and useReducer from React
 
-import { createContext, useReducer, useEffect } from 'react';
+import { createContext, useReducer, useEffect } from "react";
 
 // Creating an AuthContext using createContext
 export const AuthContext = createContext();
@@ -10,10 +10,10 @@ export const authReducer = (state, action) => {
   // Switching based on the action type
   switch (action.type) {
     // When the action type is 'LOGIN', return a new state with the user property set to action.payload
-    case 'LOGIN':
+    case "LOGIN":
       return { user: action.payload };
     // When the action type is 'LOGOUT', return a new state with the user property set to null
-    case 'LOGOUT':
+    case "LOGOUT":
       return { user: null };
     // For any other action type, return the current state
     default:
@@ -24,26 +24,26 @@ export const authReducer = (state, action) => {
 // Defining an AuthContextProvider component
 export const AuthContextProvider = ({ children }) => {
   // Using useReducer to manage the authentication state
-  const [state, dispatch] = useReducer(authReducer, { 
+  const [state, dispatch] = useReducer(authReducer, {
     // Initial state: user is null
-    user: null
+    user: null,
   });
 
-  useEffect (()=>{
-    const user = JSON.parse(localStorage.getItem('user'));
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
 
-    if (user){
-      dispatch({type: 'LOGIN', payload: user})
+    if (user) {
+      dispatch({ type: "LOGIN", payload: user });
     }
-  },[])
+  }, []);
 
   // Logging the current authentication state to the console
-  console.log('AuthContext state:', state);
-  
+  console.log("AuthContext state:", state);
+
   // Returning a Provider component that wraps the children components
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>
-      { children }
+      {children}
     </AuthContext.Provider>
   );
 };

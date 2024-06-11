@@ -14,98 +14,75 @@ import {
 } from "@mui/material";
 import {
   ForestOutlined,
-    
-    ListAltOutlined,
-    Inventory2Outlined,
-    PaymentsOutlined,
-    FolderSharedOutlined,
-    ChevronLeft,
-    ChevronRightOutlined,
-    HomeOutlined,
-    
-  } from "@mui/icons-material";
-  import { useEffect, useState } from "react";
-  import { useLocation, useNavigate } from "react-router-dom";
-  import FlexBetween from "./FlexBetween";
-  import profileImage from "assets/profile.jpg";
+  ListAltOutlined,
+  Inventory2Outlined,
+  PaymentsOutlined,
+  FolderSharedOutlined,
+  ChevronLeft,
+  ChevronRightOutlined,
+  HomeOutlined,
+} from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import FlexBetween from "./FlexBetween";
+import profileImage from "assets/profile.jpg";
 
-  const navItems = [
-    {
-      text: "Dashboard",
-      icon: <HomeOutlined />,
-    },
-    {
-      text: "Pengelola Kebun",
-      icon: null,
-    },
-    {
-      text: "Kebun",
-      icon: <ForestOutlined />,
-    },
-    {
-      text: "Tugas",
-      icon: <ListAltOutlined/>,
-    },
-    // {
-    //   text: "Inventaris",
-    //   icon: <ReceiptLongOutlined />,
-    // },
-    // {
-    //   text: "Keuangan",
-    //   icon: <PublicOutlined />,
-    // },
-    {
-      text: "Manajemen",
-      icon: null,
-    },
-    {
-      text: "Inventaris",
-      icon: <Inventory2Outlined/>,
-    },
-    {
-      text: "Keuangan",
-      icon: <PaymentsOutlined/>,
-    },
-    // {
-    //   text: "Monthly",
-    //   icon: <CalendarMonthOutlined />,
-    // },
-    // {
-    //   text: "Breakdown",
-    //   icon: <PieChartOutlined />,
-    // },
-    {
-      text: "Admin",
-      icon: null,
-    },
-    {
-      text: "Kelola Akun",
-      icon: <FolderSharedOutlined />,
-    },
-    // {
-    //   text: "Performance",
-    //   icon: <TrendingUpOutlined />,
-    // },
-  ];
+const navItems = [
+  {
+    text: "Dashboard",
+    icon: <HomeOutlined />,
+  },
+  {
+    text: "Pengelola Kebun",
+    icon: null,
+  },
+  {
+    text: "Kebun",
+    icon: <ForestOutlined />,
+  },
+  {
+    text: "Tugas",
+    icon: <ListAltOutlined />,
+  },
 
-  const Sidebar = (
-    {
-        drawerWidth,
-        isSidebarOpen,
-        setIsSidebarOpen,
-        isNonMobile,
-    }
-  ) => {
-    const {pathname} = useLocation();
-    const [active, setActive]= useState("");
-    const navigate = useNavigate();
-    const theme = useTheme();
+  {
+    text: "Manajemen",
+    icon: null,
+  },
+  {
+    text: "Inventaris",
+    icon: <Inventory2Outlined />,
+  },
+  {
+    text: "Keuangan",
+    icon: <PaymentsOutlined />,
+  },
 
-    useEffect(() => {
-        setActive(pathname.substring(1));
-    }, [pathname]
-)
-return (
+  {
+    text: "Admin",
+    icon: null,
+  },
+  {
+    text: "Kelola Akun",
+    icon: <FolderSharedOutlined />,
+  },
+];
+
+const Sidebar = ({
+  drawerWidth,
+  isSidebarOpen,
+  setIsSidebarOpen,
+  isNonMobile,
+}) => {
+  const { pathname } = useLocation();
+  const [active, setActive] = useState("");
+  const navigate = useNavigate();
+  const theme = useTheme();
+
+  useEffect(() => {
+    setActive(pathname.substring(1));
+  }, [pathname]);
+  return (
     <Box component="nav">
       {isSidebarOpen && (
         <Drawer
@@ -231,5 +208,4 @@ return (
   );
 };
 
-
-  export default Sidebar;
+export default Sidebar;
