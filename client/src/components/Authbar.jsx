@@ -8,7 +8,7 @@ import FlexBetween from './FlexBetween';
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
 import { setMode } from 'state';
-import { AppBar, IconButton, Toolbar, useTheme, Box, Link as MuiLink } from '@mui/material';
+import { AppBar, IconButton, Toolbar, useTheme, Box } from '@mui/material';
 import { useLocation, Link } from 'react-router-dom';
 
 const getLocationBasedButtonText = (pathname) => {
