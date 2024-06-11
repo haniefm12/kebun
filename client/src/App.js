@@ -8,8 +8,10 @@ import Layout from "pages/layout";
 import Dashboard from "pages/dashboard";
 import Login from "pages/login";
 import Signup from "pages/signup";
+import { useAuthContext } from "hooks/useAuthContext";
 
 function App() {
+  const {user} = useAuthContext();
   const mode = useSelector((state) => state.global.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
@@ -20,12 +22,12 @@ function App() {
           <CssBaseline />
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/" element={user ? <Dashboard/> : <Navigate to="/login" replace />} />
+              <Route path="/dashboard" element={user ?  <Dashboard/> : <Navigate to="/login" replace />} />
               
             </Route>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={!user ? <Login/> : <Navigate to="/dashboard" />} />
+            <Route path="/signup" element={!user ? <Signup/> : <Navigate to="/dashboard" />} />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

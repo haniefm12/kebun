@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Navbar from "components/Navbar";
 import Sidebar from "components/Sidebar";
+import { useAuthContext } from "../../hooks/useAuthContext";
 //import { useGetUserQuery } from "/api";
 
 const Layout = () => {

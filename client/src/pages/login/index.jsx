@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { Box, Container, Typography, TextField, Button } from '@mui/material';
-import Navbar from '../../components/Navbar';
 import FlexBetween from "../../components/FlexBetween";
 import Authbar from "../../components/Authbar";
+import { useLogin } from "../../hooks/useLogin";
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [formError, setFormError] = useState(null);
+  const { login, error , isLoading}= useLogin()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    console.log(email, password)
+    await login(email, password)
   }
 
   return (
@@ -42,9 +43,9 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)} />
           </Box>
-          {error && (
+          {formError && (
             <Typography variant="subtitle2" color="error" gutterBottom>
-              {error}
+              {formError}
             </Typography>
           )}
           <Button
@@ -53,9 +54,11 @@ const Login = () => {
             color="primary"
             disableElevation
             type="submit"
+            disabled={isLoading}
           >
             Login
           </Button>
+          {error && <div className="error">{error}</div>}
         </form>
       </Container></>
   )
