@@ -1,9 +1,11 @@
 // Signup.js
 import React, { useState } from 'react';
-import { Box, Container, Typography, TextField, Button } from '@mui/material';
+import { Box, Container, Typography, TextField, Button, InputAdornment, IconButton } from '@mui/material';
 import FlexBetween from "../../components/FlexBetween";
 import Authbar from "../../components/Authbar";
 import { useSignup } from '../../hooks/useSignup';
+import Visibility from '@mui/icons-material/Visibility'; // import Visibility icon
+import VisibilityOff from '@mui/icons-material/VisibilityOff'; // import VisibilityOff icon
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -12,13 +14,15 @@ const Signup = () => {
   const [retypePassword, setRetypePassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [formError, setFormError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false); // toggle password visibility
+  const [showRetypePassword, setShowRetypePassword] = useState(false); // toggle retype password visibility
 
-  const{signup,error,isLoading} = useSignup()
+  const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    await signup(name, email, password, phoneNumber)
+    await signup(name, email, password, phoneNumber);
   };
 
   const validatePassword = () => {
@@ -27,6 +31,14 @@ const Signup = () => {
     } else {
       setFormError(null);
     }
+  };
+
+  const handleToggleShowPassword = () => {
+    setShowPassword(!showPassword); // toggle showPassword state
+  };
+
+  const handleToggleShowRetypePassword = () => {
+    setShowRetypePassword(!showRetypePassword); // toggle showRetypePassword state
   };
 
   return (
@@ -61,19 +73,39 @@ const Signup = () => {
             fullWidth
             label="Password"
             variant="outlined"
-            type="password"
+            type={showPassword ? 'text' : 'password'} // toggle password type based on showPassword state
             value={password}
-            onChange={(e) => setPassword(e.target.value)} />
+            onChange={(e) => setPassword(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleToggleShowPassword}>
+                    {showPassword ? <VisibilityOff /> : <Visibility />} 
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
         </Box>
         <Box sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Retype Password"
             variant="outlined"
-            type="password"
+            type={showRetypePassword ? 'text' : 'password'} // toggle retype password type based on showRetypePassword state
             value={retypePassword}
             onChange={(e) => setRetypePassword(e.target.value)}
-            onBlur={validatePassword} />
+            onBlur={validatePassword}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleToggleShowRetypePassword}>
+                    {showRetypePassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
         </Box>
         <Box sx={{ mb: 2 }}>
           <TextField
