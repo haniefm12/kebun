@@ -134,6 +134,16 @@ export const tokensDark = {
           fontSize: 14,
         },
       },
+      components: {
+        MuiLink: {
+          defaultProps: {
+            sx: {
+              color: 'inherit',
+              textDecoration: 'none',
+            }, // <--- missing closing brace here
+        }
+      }
+      }
     };
   };
 

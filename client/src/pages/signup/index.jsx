@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Box, Container, Typography, TextField, Button } from '@mui/material';
 import FlexBetween from "../../components/FlexBetween";
 import Authbar from "../../components/Authbar";
+import { useSignup } from '../../hooks/useSignup';
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -10,19 +11,21 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [error, setError] = useState(null);
+  const [formError, setFormError] = useState(null);
+
+  const{signup,error,isLoading} = useSignup()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    console.log(email, password)
+    await signup(name, email, password, phoneNumber)
   };
 
   const validatePassword = () => {
     if (password !== retypePassword) {
-      setError('Passwords do not match');
+      setFormError('Passwords do not match');
     } else {
-      setError(null);
+      setFormError(null);
     }
   };
 
@@ -81,9 +84,9 @@ const Signup = () => {
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)} />
         </Box>
-        {error && (
+        {formError && (
           <Typography variant="subtitle2" color="error" gutterBottom>
-            {error}
+            {formError}
           </Typography>
         )}
         <Button
@@ -92,9 +95,11 @@ const Signup = () => {
           color="primary"
           disableElevation
           type="submit"
+          disabled={isLoading}
         >
           Sign Up
         </Button>
+        {error && <div className='error'>{error}</div>}
       </form>
     </Container></>
   );
