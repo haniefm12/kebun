@@ -1,13 +1,14 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-
+import helmet from "helmet";
 import userRoutes from "./routes/user.js";
 import generalRoutes from "./routes/general.js";
 
 dotenv.config();
 
 const app = express();
+app.use(helmet());
 
 app.use(express.json());
 

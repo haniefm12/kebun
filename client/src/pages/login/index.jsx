@@ -47,7 +47,7 @@ const Login = () => {
           <Box sx={{ mb: 2 }}>
             <TextField
               fullWidth
-              label="Username"
+              label="E-mail"
               variant="outlined"
               value={email}
               onChange={(e) => setEmail(e.target.value)}

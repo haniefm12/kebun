@@ -115,6 +115,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                     sx={{
                       color: theme.palette.secondary[200],
                       textAlign: "center",
+                      textTransform: "uppercase",
                     }}
                   >
                     {data.role}
@@ -131,6 +132,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
+              <MenuItem>Profile</MenuItem>
               <MenuItem onClick={handleOtherClick}>Log Out</MenuItem>
             </Menu>
           </FlexBetween>
