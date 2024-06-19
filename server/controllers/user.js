@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, {
-    expiresIn: "1h", // token will expire in 1 hour
+    expiresIn: "6h", // token will expire in 6 hour
   });
 };
 

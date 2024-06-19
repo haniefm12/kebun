@@ -9,6 +9,7 @@ import Dashboard from "pages/dashboard";
 import Login from "pages/login";
 import Signup from "pages/signup";
 import { useAuthContext } from "hooks/useAuthContext";
+// Import the provider
 
 function App() {
   const { user } = useAuthContext();
@@ -20,6 +21,7 @@ function App() {
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+
           <Routes>
             <Route element={<Layout />}>
               <Route

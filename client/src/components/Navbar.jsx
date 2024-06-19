@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   LightModeOutlined,
   DarkModeOutlined,
@@ -32,7 +32,24 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
   const { logout } = useLogout();
+  const [data, setData] = useState({});
   const { user } = useAuthContext();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("api/general", {
+        headers: { Authorization: `Bearer ${user.token}` },
+      });
+      const data = await response.json();
+      // const json = await response.json();
+      setData(data);
+      // console.log(json);
+    };
+
+    if (user) {
+      fetchData();
+    }
+  }, [user]);
   const handleOtherClick = () => {
     logout();
   };
@@ -84,20 +101,23 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                 borderRadius="50%"
                 sx={{ objectFit: "cover" }}
               />
-              {user && (
+              {data && (
                 <Box textAlign="left">
                   <Typography
                     fontWeight="bold"
                     fontSize="0.85rem"
                     sx={{ color: theme.palette.secondary[100] }}
                   >
-                    {user.email}
+                    {data.name}
                   </Typography>
                   <Typography
                     fontSize="0.75rem"
-                    sx={{ color: theme.palette.secondary[200] }}
+                    sx={{
+                      color: theme.palette.secondary[200],
+                      textAlign: "center",
+                    }}
                   >
-                    {user.role}
+                    {data.role}
                   </Typography>
                 </Box>
               )}
